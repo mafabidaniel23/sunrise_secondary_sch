@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission - Sunrise Secondary School</title>
+    <style>
+        /* CSS Variables for Consistent Styling */
+        :root {
+            --primary: #1a5276;
+            --secondary: #f39c12;
+            --accent: #2ecc71;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #154360;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Form Pages */
+        .form-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            flex-grow: 1;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 82, 118, 0.2);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-option input, .checkbox-option input {
+            margin-right: 8px;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background-color: white;
+                width: 80%;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Sunrise <span>Secondary School</span></h1>
+            </div>
+            <div class="hamburger" id="hamburger">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.htm">Home</a></li>
+                <li><a href="login.htm">Login</a></li>
+                <li><a href="admission.htm">Admission</a></li>
+                <li><a href="index.htm#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Admission Form -->
+    <div class="form-container">
+        <h2>Admission Application Form</h2>
+        <form id="admissionForm">
+            <div class="form-group">
+                <label for="studentName">Student Full Name</label>
+                <input type="text" id="studentName" class="form-control" placeholder="Enter student's full name">
+                <div class="error" id="studentNameError">Student name is required</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="parentName">Parent/Guardian Name</label>
+                <input type="text" id="parentName" class="form-control" placeholder="Enter parent/guardian name">
+                <div class="error" id="parentNameError">Parent/guardian name is required</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter email address">
+                <div class="error" id="emailError">Valid email address is required</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" class="form-control" placeholder="Enter phone number">
+                <div class="error" id="phoneError">Phone number is required</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" class="form-control">
+                <div class="error" id="dobError">Date of birth is required</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="gender" value="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+                <div class="error" id="genderError">Please select a gender</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="grade">Grade Applying For</label>
+                <select id="grade" class="form-control">
+                    <option value="">Select Grade</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+                <div class="error" id="gradeError">Please select a grade</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Extracurricular Interests</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="sports" name="interests" value="sports">
+                        <label for="sports">Sports</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="music" name="interests" value="music">
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="arts" name="interests" value="arts">
+                        <label for="arts">Arts</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="science" name="interests" value="science">
+                        <label for="science">Science Club</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Additional Information</label>
+                <textarea id="message" class="form-control" rows="4" placeholder="Any additional information you'd like to share"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sunrise Secondary School</h3>
+                    <p>Providing quality education since 1985. Our mission is to nurture young minds and prepare them for a successful future.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.htm">Home</a></li>
+                        <li><a href="login.htm">Login</a></li>
+                        <li><a href="admission.htm">Admission</a></li>
+                        <li><a href="index.htm#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>123 Education Avenue, Kampala City</li>
+                        <li>+256709686769</li>
+                        <li>info@sriseschool.edu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Sunrise Secondary School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Admission form validation
+        const admissionForm = document.getElementById('admissionForm');
+        if (admissionForm) {
+            admissionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const studentName = document.getElementById('studentName');
+                const parentName = document.getElementById('parentName');
+                const email = document.getElementById('email');
+                const phone = document.getElementById('phone');
+                const dob = document.getElementById('dob');
+                const gender = document.querySelector('input[name="gender"]:checked');
+                const grade = document.getElementById('grade');
+                
+                const studentNameError = document.getElementById('studentNameError');
+                const parentNameError = document.getElementById('parentNameError');
+                const emailError = document.getElementById('emailError');
+                const phoneError = document.getElementById('phoneError');
+                const dobError = document.getElementById('dobError');
+                const genderError = document.getElementById('genderError');
+                const gradeError = document.getElementById('gradeError');
+                
+                let isValid = true;
+                
+                // Validate student name
+                if (!studentName.value.trim()) {
+                    studentNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    studentNameError.style.display = 'none';
+                }
+                
+                // Validate parent name
+                if (!parentName.value.trim()) {
+                    parentNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    parentNameError.style.display = 'none';
+                }
+                
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email.value.trim() || !emailRegex.test(email.value)) {
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                }
+                
+                // Validate phone
+                if (!phone.value.trim()) {
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    phoneError.style.display = 'none';
+                }
+                
+                // Validate date of birth
+                if (!dob.value) {
+                    dobError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    dobError.style.display = 'none';
+                }
+                
+                // Validate gender
+                if (!gender) {
+                    genderError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    genderError.style.display = 'none';
+                }
+                
+                // Validate grade
+                if (!grade.value) {
+                    gradeError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    gradeError.style.display = 'none';
+                }
+                
+                if (isValid) {
+                    alert('Application submitted successfully! We will contact you soon.');
+                    // In a real application, you would submit the form here
+                }
+            });
+        }
+    </script>
+</body>
+</html>
